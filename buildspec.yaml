@@ -4,17 +4,18 @@ phases:
   pre_build:
     commands:
       - docker logout
-      - echo "Logging in to Amazon ECR..."
+      - echo "Logging in to Amazon ECR"
       - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 977098990633.dkr.ecr.eu-west-1.amazonaws.com
       - echo "Docker Login Success"
   build:
     commands:
-      - echo "Building the Docker image..."
+      - echo "Building the Docker image"
       - docker build -t pparsons-wiz-demo .
       - echo "Tagging the Docker image"
       - docker tag pparsons-wiz-demo:latest 977098990633.dkr.ecr.eu-west-1.amazonaws.com/pparsons-wiz-demo:latest
+      - echo "Docker image tagged"
   post_build:
     commands:
-      - echo "Pushing the Docker image to Amazon ECR..."
+      - echo "Pushing the Docker image to Amazon ECR"
       - docker push 977098990633.dkr.ecr.eu-west-1.amazonaws.com/pparsons-wiz-demo:latest
       - echo "Build completed on `date`"
