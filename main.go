@@ -17,6 +17,7 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("assets/*.html")
 	router.Static("/assets", "./assets")
+	router.StaticFile("/wizexercise.txt", "./assets/wizexercise.txt")
 
 	router.GET("/", index)
 	router.GET("/todos/:userid", controller.GetTodos)
